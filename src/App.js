@@ -20,34 +20,29 @@ function App() {
       .then(resData => setArtData(resData))
   }, [artID])
 
-  // in App.js
-  // send this function down to <ButtonBar />
+  //handles our iteration from child component, ButtonBar
   const handleIterate = (e) => {
+    // We still want to eliminate the default behavior of our form submittal
+    e.preventDefault()
+    //sets the art ID to be the value of the target
     setArtID(artID + Number(e.target.value))
   }
 
-
-
+  //define a fun function to create a random artID
   const handleRandom = (e) => {
     // We still want to eliminate the default behavior of our form submittal
     e.preventDefault()
     // create a random value to jump to between 1-3000
-    let randomID = Math.floor(Math.random() * 3000) + 1
-    setArtID(randomID)
+    setArtID(Math.floor(Math.random() * 3000) + 1)
   }
-
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={artData.primaryImage} alt={artData.title} />
-        <p>{artData.title} created by {artData.artistDisplayName} in {artData.accessionYear}</p>
         <div>
           <Gallery artData={artData}>
-
           </Gallery>
           <ButtonBar handleIterate={handleIterate} handleRandom={handleRandom}>
-
           </ButtonBar>
         </div>
       </header>
